@@ -96,12 +96,12 @@ export const projects: Project[] = [
   },
   {
     slug: "checklist",
-    title: "Checklist",
-    url: "https://checklist.vercel.app",
-    tags: ["app", "produtividade"],
+    title: "Lazo Pass",
+    url: "https://lazopass.com",
+    tags: ["app", "eventos"],
     blurb: {
-      pt: "App web de checklists para organizar tarefas e rotinas no navegador.",
-      en: "Browser checklist app for everyday tasks and routines.",
+      pt: "Festas, eventos e baladas perto de você — no ar em lazopass.com.",
+      en: "Parties, events, and nights out near you — live at lazopass.com.",
     },
   },
   {
@@ -117,11 +117,11 @@ export const projects: Project[] = [
   {
     slug: "itinerar",
     title: "rotei",
-    url: "https://rotei.com",
+    url: "https://rotei.app",
     tags: ["SaaS", "viagem", "Next.js"],
     blurb: {
-      pt: "Planejador de viagens com mapa: roteiros, rotas, horários e planejamento em grupo — no ar em rotei.com.",
-      en: "Travel planner with maps: day-by-day itineraries, routes, timing, and group planning — live at rotei.com.",
+      pt: "Planejador de viagens com mapa: roteiros, rotas, horários e planejamento em grupo — no ar em rotei.app.",
+      en: "Travel planner with maps: day-by-day itineraries, routes, timing, and group planning — live at rotei.app.",
     },
   },
   {
@@ -188,6 +188,7 @@ export const projects: Project[] = [
 
 const leadSlugs = [
   "itinerar",
+  "checklist",
   "ilumme",
   "v0-santa-bella-website",
   "capiclicker",
