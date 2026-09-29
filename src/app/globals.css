@@ -139,6 +139,45 @@ body {
   box-shadow: none;
 }
 
+@keyframes dex-hop {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes dex-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+.dex-happy {
+  animation: dex-hop 0.45s steps(2, end) infinite;
+}
+
+.dex-bad {
+  animation: dex-shake 0.18s steps(2, end) 6;
+}
+
+.dex-flash-good {
+  background: #c6e070;
+}
+
+.dex-flash-bad {
+  background: #6b8f0a;
+}
+
 .dex-device[data-panel="list"] .dex-detail {
   display: none;
 }

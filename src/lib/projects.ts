@@ -127,11 +127,11 @@ export const projects: Project[] = [
   {
     slug: "itinerar",
     title: "rotei",
-    url: "https://itinerar.vercel.app",
+    url: "https://rotei.com",
     tags: ["SaaS", "viagem", "Next.js"],
     blurb: {
-      pt: "Planejador de viagens com mapa: roteiros, rotas, horários e planejamento em grupo — no Brasil ou no exterior.",
-      en: "Travel planner with maps: day-by-day itineraries, routes, timing, and group planning — Brazil or abroad.",
+      pt: "Planejador de viagens com mapa: roteiros, rotas, horários e planejamento em grupo — no ar em rotei.com.",
+      en: "Travel planner with maps: day-by-day itineraries, routes, timing, and group planning — live at rotei.com.",
     },
   },
   {
@@ -147,11 +147,11 @@ export const projects: Project[] = [
   {
     slug: "v0-santa-bella-website",
     title: "Santa Bella",
-    url: "https://v0-santa-bella-website.vercel.app",
+    url: "https://santabellasc.com",
     tags: ["website", "v0"],
     blurb: {
-      pt: "Site institucional Santa Bella — presença digital de marca, construído com v0.",
-      en: "Santa Bella brand website — a digital presence built with v0.",
+      pt: "Site institucional Santa Bella — presença da marca no ar em santabellasc.com.",
+      en: "Santa Bella brand website — live at santabellasc.com.",
     },
   },
   {
@@ -162,6 +162,16 @@ export const projects: Project[] = [
     blurb: {
       pt: "SaaS para criar e baixar contratos de prestação de serviço em minutos — modelos, revisão e PDF para MEI e freelancers.",
       en: "SaaS to draft and download service contracts in minutes — templates, review, and PDF for freelancers and small firms.",
+    },
+  },
+  {
+    slug: "capiclicker",
+    title: "Capiclicker",
+    url: "https://capiclicker.com",
+    tags: ["jogo", "clicker"],
+    blurb: {
+      pt: "Capivara Clicker: jogo de browser para clicar, evoluir e cuidar da capivara — no ar em capiclicker.com.",
+      en: "Capivara Clicker: a browser game where you click, grow, and look after the capybara — live at capiclicker.com.",
     },
   },
   {
@@ -177,14 +187,30 @@ export const projects: Project[] = [
   {
     slug: "v0-dj-andre-heat-website",
     title: "André Heat",
-    url: "https://v0-dj-andre-heat-website.vercel.app",
+    url: "https://djandreheat.com.br",
     tags: ["website", "v0"],
     blurb: {
-      pt: "Site de DJ e produtor brasileiro: bio, press kit e materiais para booking.",
-      en: "Site for a Brazilian DJ/producer: bio, press kit, and booking materials.",
+      pt: "Site de DJ e produtor brasileiro: bio, press kit e materiais para booking — no ar em djandreheat.com.br.",
+      en: "Site for a Brazilian DJ and producer: bio, press kit, and booking materials — live at djandreheat.com.br.",
     },
   },
 ];
+
+const leadSlugs = [
+  "itinerar",
+  "ilumme",
+  "v0-santa-bella-website",
+  "capiclicker",
+  "v0-dj-andre-heat-website",
+] as const;
+
+export function orderedProjects(): Project[] {
+  const lead = leadSlugs
+    .map((slug) => projects.find((project) => project.slug === slug))
+    .filter((project): project is Project => project !== undefined);
+  const rest = projects.filter((project) => !lead.some((item) => item.slug === project.slug));
+  return [...lead, featuredProject, ...rest];
+}
 
 export function projectBlurb(project: Project, locale: Locale) {
   return project.blurb[locale];

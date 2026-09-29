@@ -1,16 +1,17 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import type { Dictionary } from "@/lib/dictionary";
-import { featuredProject, projects, type Project } from "@/lib/projects";
+import { orderedProjects, type Project } from "@/lib/projects";
 import { site, type Locale } from "@/lib/site";
 import { ContactForm } from "./ContactForm";
 import { Sprite } from "./Sprite";
+import { StarterPick } from "./StarterPick";
 
 type Tab = "files" | "field";
 type Panel = "list" | "detail";
-type DataId = "profile" | "services" | "faq" | "contact";
+type DataId = "profile" | "services" | "faq" | "contact" | "starter";
 
 type DexEntry =
   | { kind: "data"; id: DataId; title: string; haystack: string }
@@ -53,8 +54,14 @@ export function Dex({ locale, copy }: { locale: Locale; copy: Dictionary }) {
         title: copy.dex.contact,
         haystack: `${copy.dex.contact} github email`,
       },
+      {
+        kind: "data",
+        id: "starter",
+        title: copy.dex.starter,
+        haystack: `${copy.dex.starter} charmander squirtle bulbasaur`,
+      },
     ];
-    const field: DexEntry[] = [featuredProject, ...projects].map((project) => ({
+    const field: DexEntry[] = orderedProjects().map((project) => ({
       kind: "project" as const,
       project,
       title: project.title,
@@ -275,19 +282,19 @@ export function Dex({ locale, copy }: { locale: Locale; copy: Dictionary }) {
             <span className="pointer-events-none absolute top-1/2 right-0 left-0 h-9 -translate-y-1/2 bg-[#1a1a1a]" />
             <span />
             <PadButton label={copy.dex.up} onClick={() => move(-1)}>
-              ▲
+              <Arrow direction="up" />
             </PadButton>
             <span />
             <PadButton label={copy.dex.toFiles} onClick={() => selectTab("files")}>
-              ◀
+              <Arrow direction="left" />
             </PadButton>
             <span />
             <PadButton label={copy.dex.toField} onClick={() => selectTab("field")}>
-              ▶
+              <Arrow direction="right" />
             </PadButton>
             <span />
             <PadButton label={copy.dex.down} onClick={() => move(1)}>
-              ▼
+              <Arrow direction="down" />
             </PadButton>
             <span />
           </div>
@@ -305,6 +312,21 @@ export function Dex({ locale, copy }: { locale: Locale; copy: Dictionary }) {
   );
 }
 
+function Arrow({ direction }: { direction: "up" | "down" | "left" | "right" }) {
+  const turn = {
+    up: "",
+    right: "rotate-90",
+    down: "rotate-180",
+    left: "-rotate-90",
+  }[direction];
+
+  return (
+    <span className={`inline-block text-[11px] leading-none ${turn}`} aria-hidden="true">
+      ▲
+    </span>
+  );
+}
+
 function PadButton({
   label,
   onClick,
@@ -312,7 +334,7 @@ function PadButton({
 }: {
   label: string;
   onClick: () => void;
-  children: string;
+  children: ReactNode;
 }) {
   return (
     <button
@@ -412,6 +434,7 @@ function EntryView({
           <FaqBody items={copy.faq.items} open={faqOpen} onOpen={onFaq} />
         ) : null}
         {entry.kind === "data" && entry.id === "contact" ? <ContactBody copy={copy} /> : null}
+        {entry.kind === "data" && entry.id === "starter" ? <StarterPick copy={copy} /> : null}
       </div>
     </article>
   );
