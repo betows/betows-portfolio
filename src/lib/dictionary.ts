@@ -33,8 +33,8 @@ export const dictionary = {
     featured: {
       kicker: "Produto em destaque",
       title: "Appoint",
-      lead: "Marketplace de prestadores e clientes no Vale do Itajaí.",
-      body: "Appoint conecta quem presta serviço a quem precisa agendar — downloads, bookings e operação. Além da landing, o trabalho inclui painel admin e app mobile.",
+      lead: "Landing para contratar serviço em Blumenau, Joinville e BC.",
+      body: "A página pública da Appoint está em appointcorp.com. É por ela que o cliente encontra eletricista, diarista e encanador.",
       live: "Abrir landing",
       github: "Repositórios",
     },
@@ -200,8 +200,8 @@ export const dictionary = {
     featured: {
       kicker: "Flagship product",
       title: "Appoint",
-      lead: "A marketplace for service providers and clients in Vale do Itajaí.",
-      body: "Appoint connects people who deliver services with people who need to book — downloads, scheduling, and ops. Beyond the landing, the work includes an admin console and a mobile app.",
+      lead: "Landing to book a service in Blumenau, Joinville, and BC.",
+      body: "The public Appoint page is appointcorp.com. That is where a client finds an electrician, a cleaner, or a plumber.",
       live: "Open landing",
       github: "Repositories",
     },

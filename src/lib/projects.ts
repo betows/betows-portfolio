@@ -14,22 +14,12 @@ export type Project = {
 export const featuredProject: Project = {
   slug: "appoint",
   title: "Appoint",
-  url: "https://v0-appoint-landing-page.vercel.app",
-  github: [
-    "https://github.com/betows/appointLanding",
-    "https://github.com/betows/appoint-admin",
-    "https://github.com/betows/appoint-mobile",
-    "https://github.com/betows/appoint-landing-brilliant",
-  ],
-  tags: ["marketplace", "Next.js", "admin", "React Native"],
+  url: "https://appointcorp.com",
+  tags: ["marketplace", "landing", "Next.js"],
   featured: true,
-  liveNote: {
-    pt: "A landing pública em Vercel está indisponível no momento. O produto segue no GitHub (landing, admin e mobile).",
-    en: "The public Vercel landing is currently unavailable. Product work lives on GitHub (landing, admin, and mobile).",
-  },
   blurb: {
-    pt: "Marketplace local que liga prestadores de serviço e clientes no Vale do Itajaí — downloads, agendamentos e operação no admin + app mobile.",
-    en: "Local marketplace connecting service providers and clients in Vale do Itajaí — bookings, downloads, plus admin and mobile apps.",
+    pt: "Landing para contratar eletricista, diarista e encanador em Blumenau, Joinville e BC — no ar em appointcorp.com.",
+    en: "Landing to book an electrician, cleaner, or plumber in Blumenau, Joinville, and BC — live at appointcorp.com.",
   },
 };
 
@@ -209,7 +199,7 @@ export function orderedProjects(): Project[] {
     .map((slug) => projects.find((project) => project.slug === slug))
     .filter((project): project is Project => project !== undefined);
   const rest = projects.filter((project) => !lead.some((item) => item.slug === project.slug));
-  return [...lead, featuredProject, ...rest];
+  return [featuredProject, ...lead, ...rest];
 }
 
 export function projectBlurb(project: Project, locale: Locale) {
