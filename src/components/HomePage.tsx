@@ -22,7 +22,6 @@ const skills = [
 export function HomePage({ locale, copy }: { locale: Locale; copy: Dictionary }) {
   return (
     <div className="relative flex min-h-full flex-col">
-      <div className="paper-grain" aria-hidden="true" />
       <Header locale={locale} copy={copy} />
 
       <div className="border-b border-line bg-ink text-cream">
@@ -295,6 +294,7 @@ export function HomePage({ locale, copy }: { locale: Locale; copy: Dictionary })
       </main>
 
       <Footer copy={copy} />
+      <div className="paper-grain" aria-hidden="true" />
     </div>
   );
 }

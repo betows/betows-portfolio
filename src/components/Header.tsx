@@ -19,7 +19,7 @@ export function Header({ locale, copy }: { locale: Locale; copy: Dictionary }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line/80 bg-paper/80 backdrop-blur-md">
+    <header className="sticky top-0 z-40 border-b border-line/80 bg-paper/90 backdrop-blur-md">
       <div className="mx-auto flex h-[72px] w-full max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link href={locale === "en" ? "/en" : "/"} className="flex items-center gap-2.5">
           <Mark className="h-8 w-8" />
@@ -64,7 +64,7 @@ export function Header({ locale, copy }: { locale: Locale; copy: Dictionary }) {
       {open ? (
         <nav
           id="mobile-nav"
-          className="border-t border-line bg-cream px-4 py-4 md:hidden"
+          className="relative z-50 border-t border-line bg-cream px-4 py-4 shadow-sm md:hidden"
           aria-label="Mobile"
         >
           <div className="flex flex-col gap-3 text-base font-medium">
