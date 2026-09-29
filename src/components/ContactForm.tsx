@@ -5,7 +5,7 @@ import type { Dictionary } from "@/lib/dictionary";
 import { site } from "@/lib/site";
 
 const fieldClass =
-  "rounded-lg border border-[#1d4e7a] bg-[#061018] px-3 py-2 text-sm text-[#e7f4ff] outline-none placeholder:text-[#6f93b3] focus:border-[#7fd3ff]";
+  "border-[3px] border-[#0f380f] bg-[#8bac0f] px-2 py-1.5 text-lg text-[#0f380f] outline-none placeholder:text-[#306230]";
 
 export function ContactForm({ copy }: { copy: Dictionary["contact"] }) {
   const [name, setName] = useState("");
@@ -22,8 +22,8 @@ export function ContactForm({ copy }: { copy: Dictionary["contact"] }) {
   }
 
   return (
-    <form onSubmit={onSubmit} className="grid gap-3">
-      <label className="grid gap-1 text-xs font-medium uppercase tracking-wide text-[#8eb4d4]">
+    <form onSubmit={onSubmit} className="grid gap-2 font-[family-name:var(--font-lcd)] text-lg">
+      <label className="grid gap-1">
         {copy.name}
         <input
           name="name"
@@ -34,7 +34,7 @@ export function ContactForm({ copy }: { copy: Dictionary["contact"] }) {
           className={fieldClass}
         />
       </label>
-      <label className="grid gap-1 text-xs font-medium uppercase tracking-wide text-[#8eb4d4]">
+      <label className="grid gap-1">
         {copy.emailLabel}
         <input
           name="email"
@@ -46,25 +46,25 @@ export function ContactForm({ copy }: { copy: Dictionary["contact"] }) {
           className={fieldClass}
         />
       </label>
-      <label className="grid gap-1 text-xs font-medium uppercase tracking-wide text-[#8eb4d4]">
+      <label className="grid gap-1">
         {copy.message}
         <textarea
           name="message"
           required
-          rows={4}
+          rows={3}
           value={message}
           onChange={(event) => setMessage(event.target.value)}
           placeholder={copy.messagePh}
-          className={`${fieldClass} resize-y`}
+          className={`${fieldClass} resize-none`}
         />
       </label>
       <button
         type="submit"
-        className="rounded-full bg-[#ffd15c] px-4 py-2 text-sm font-semibold text-[#2a1408]"
+        className="pixel-press border-[3px] border-[#0f380f] bg-[#0f380f] px-3 py-1.5 font-[family-name:var(--font-pixel)] text-sm text-[#9bbc0f] shadow-[3px_3px_0_#0f380f]"
       >
         {copy.submit}
       </button>
-      <p className="text-xs leading-5 text-[#8eb4d4]">{copy.hint}</p>
+      <p className="text-base leading-5 text-[#306230]">{copy.hint}</p>
     </form>
   );
 }
