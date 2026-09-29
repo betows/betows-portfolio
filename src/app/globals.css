@@ -1,34 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --paper: #f3efe6;
-  --paper-deep: #ebe4d6;
-  --cream: #fffaf1;
-  --card: #fffcf6;
-  --ink: #2a2a2a;
-  --ink-soft: #3d3a36;
-  --muted: #6d675f;
-  --line: #e4ddd0;
-  --lime: #e7f08c;
-  --lime-deep: #d7e36a;
-  --blue: #4d8dff;
-  --blue-soft: #c7dcff;
-  --white: #fffcf7;
+  --lcd: #07182c;
+  --lcd-ink: #e7f4ff;
+  --lcd-dim: #8eb4d4;
+  --lcd-line: #16406a;
+  --shell: #d62828;
+  --amber: #ffd15c;
 }
 
 @theme inline {
-  --color-paper: var(--paper);
-  --color-paper-deep: var(--paper-deep);
-  --color-cream: var(--cream);
-  --color-card: var(--card);
-  --color-ink: var(--ink);
-  --color-ink-soft: var(--ink-soft);
-  --color-muted: var(--muted);
-  --color-line: var(--line);
-  --color-lime: var(--lime);
-  --color-lime-deep: var(--lime-deep);
-  --color-blue: var(--blue);
-  --color-blue-soft: var(--blue-soft);
   --font-sans: var(--font-figtree);
   --font-mono: var(--font-geist-mono);
 }
@@ -52,58 +33,93 @@ html {
 }
 
 body {
-  background: var(--paper);
-  color: var(--ink);
+  min-height: 100%;
+  background:
+    radial-gradient(900px 480px at 50% -10%, rgba(255, 90, 70, 0.28), transparent 60%),
+    radial-gradient(700px 500px at 100% 100%, rgba(40, 90, 160, 0.25), transparent 55%),
+    #14090c;
+  color: #f6efe8;
   font-family: var(--font-figtree), "Figtree", ui-sans-serif, system-ui, sans-serif;
 }
 
-.paper-grain {
+.shell {
+  background:
+    radial-gradient(140% 90% at 8% 0%, rgba(255, 255, 255, 0.38), transparent 36%),
+    linear-gradient(165deg, #ff6a55 0%, #e23b34 28%, #b91c22 62%, #7f1218 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    inset 0 -18px 30px rgba(80, 0, 0, 0.25),
+    0 28px 60px rgba(0, 0, 0, 0.45);
+}
+
+.lcd {
+  background:
+    linear-gradient(180deg, rgba(120, 190, 255, 0.08), transparent 28%),
+    linear-gradient(180deg, #0c2744, #071526 70%);
+  box-shadow:
+    inset 0 0 0 1px rgba(140, 200, 255, 0.18),
+    inset 0 12px 24px rgba(0, 0, 0, 0.35);
+}
+
+.lcd-scan {
   pointer-events: none;
-  position: fixed;
+  position: absolute;
   inset: 0;
-  z-index: 20;
-  opacity: 0.2;
+  border-radius: inherit;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0 2px,
+    rgba(0, 0, 0, 0.16) 2px 3px
+  );
   mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-.rise {
-  animation: rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+.dpad-btn,
+.hardware-btn {
+  transition: transform 80ms ease, filter 80ms ease;
 }
 
-.rise-delay-1 {
-  animation-delay: 80ms;
+.dpad-btn:active,
+.hardware-btn:active {
+  transform: translateY(2px);
+  filter: brightness(0.92);
 }
 
-.rise-delay-2 {
-  animation-delay: 160ms;
+.dex-list {
+  scrollbar-width: thin;
+  scrollbar-color: #1d4e7a transparent;
 }
 
-.rise-delay-3 {
-  animation-delay: 240ms;
+.boot-overlay {
+  animation: bootfade 1s ease forwards;
 }
 
-@keyframes rise {
-  from {
-    opacity: 0;
-    transform: translateY(18px);
-  }
-  to {
+@keyframes bootfade {
+  0%,
+  62% {
     opacity: 1;
-    transform: none;
+    visibility: visible;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
   }
 }
 
-.marquee {
-  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+@media (max-width: 860px) {
+  .dex-device[data-panel="list"] .dex-detail {
+    display: none;
+  }
+
+  .dex-device[data-panel="detail"] .dex-list-pane {
+    display: none;
+  }
 }
 
-.faq-answer {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 280ms ease;
-}
-
-.faq-answer.open {
-  grid-template-rows: 1fr;
+@media (min-width: 861px) {
+  .dex-list-pane,
+  .dex-detail {
+    display: flex;
+  }
 }
