@@ -21,7 +21,7 @@ function pad(value: number) {
 }
 
 export function Dex({ locale, copy }: { locale: Locale; copy: Dictionary }) {
-  const [tab, setTab] = useState<Tab>("field");
+  const [tab, setTab] = useState<Tab>("files");
   const [index, setIndex] = useState(0);
   const [panel, setPanel] = useState<Panel>("list");
   const [query, setQuery] = useState("");
