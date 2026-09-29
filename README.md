@@ -2,7 +2,7 @@
 
 Bilingual personal site (PT-BR + EN) for [Roberto Amaral](https://github.com/betows): landing pages, SaaS/systems, and product builds.
 
-Visual language is inspired by Bugster.dev (paper grain, cream cards, charcoal type, lime pill CTAs) with original geometric illustrations — no third-party mascot IP.
+The interface is **betowdex**, an original handheld catalog. Browse numbered project entries and info files (profile, services, FAQ, contact) with the on-screen list, search, and the D-pad. It is not a Nintendo or Pokémon product and does not use their names, characters, or artwork.
 
 ## Stack
 

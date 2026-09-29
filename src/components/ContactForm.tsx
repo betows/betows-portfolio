@@ -4,6 +4,9 @@ import { useState, type FormEvent } from "react";
 import type { Dictionary } from "@/lib/dictionary";
 import { site } from "@/lib/site";
 
+const fieldClass =
+  "rounded-lg border border-[#1d4e7a] bg-[#061018] px-3 py-2 text-sm text-[#e7f4ff] outline-none placeholder:text-[#6f93b3] focus:border-[#7fd3ff]";
+
 export function ContactForm({ copy }: { copy: Dictionary["contact"] }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -19,8 +22,8 @@ export function ContactForm({ copy }: { copy: Dictionary["contact"] }) {
   }
 
   return (
-    <form onSubmit={onSubmit} className="grid gap-4">
-      <label className="grid gap-2 text-sm font-medium">
+    <form onSubmit={onSubmit} className="grid gap-3">
+      <label className="grid gap-1 text-xs font-medium uppercase tracking-wide text-[#8eb4d4]">
         {copy.name}
         <input
           name="name"
@@ -28,10 +31,10 @@ export function ContactForm({ copy }: { copy: Dictionary["contact"] }) {
           onChange={(event) => setName(event.target.value)}
           placeholder={copy.namePh}
           autoComplete="name"
-          className="rounded-2xl border border-line bg-white px-4 py-3 text-base font-normal outline-none ring-lime focus:ring-2"
+          className={fieldClass}
         />
       </label>
-      <label className="grid gap-2 text-sm font-medium">
+      <label className="grid gap-1 text-xs font-medium uppercase tracking-wide text-[#8eb4d4]">
         {copy.emailLabel}
         <input
           name="email"
@@ -40,28 +43,28 @@ export function ContactForm({ copy }: { copy: Dictionary["contact"] }) {
           onChange={(event) => setEmail(event.target.value)}
           placeholder={copy.emailPh}
           autoComplete="email"
-          className="rounded-2xl border border-line bg-white px-4 py-3 text-base font-normal outline-none ring-lime focus:ring-2"
+          className={fieldClass}
         />
       </label>
-      <label className="grid gap-2 text-sm font-medium">
+      <label className="grid gap-1 text-xs font-medium uppercase tracking-wide text-[#8eb4d4]">
         {copy.message}
         <textarea
           name="message"
           required
-          rows={5}
+          rows={4}
           value={message}
           onChange={(event) => setMessage(event.target.value)}
           placeholder={copy.messagePh}
-          className="resize-y rounded-2xl border border-line bg-white px-4 py-3 text-base font-normal outline-none ring-lime focus:ring-2"
+          className={`${fieldClass} resize-y`}
         />
       </label>
       <button
         type="submit"
-        className="rounded-full bg-lime px-5 py-3 text-sm font-semibold text-ink transition hover:bg-lime-deep"
+        className="rounded-full bg-[#ffd15c] px-4 py-2 text-sm font-semibold text-[#2a1408]"
       >
         {copy.submit}
       </button>
-      <p className="text-sm leading-6 text-muted">{copy.hint}</p>
+      <p className="text-xs leading-5 text-[#8eb4d4]">{copy.hint}</p>
     </form>
   );
 }

@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Roberto Amaral — landing pages e sistemas que convertem";
+export const alt = "betowdex — Roberto Amaral, landing pages e sistemas";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -12,54 +12,39 @@ export default function OgImage() {
           width: "100%",
           height: "100%",
           display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          background: "#F3EFE6",
-          padding: 72,
-          color: "#2A2A2A",
+          background: "#14090c",
+          padding: 48,
         }}
       >
         <div
           style={{
             display: "flex",
-            alignItems: "center",
-            gap: 16,
-            fontSize: 28,
-            fontWeight: 600,
+            flexDirection: "column",
+            justifyContent: "space-between",
+            width: "100%",
+            borderRadius: 36,
+            background: "#d62828",
+            padding: 36,
           }}
         >
+          <div style={{ display: "flex", color: "white", fontSize: 28 }}>betowdex</div>
           <div
             style={{
-              width: 48,
-              height: 48,
-              borderRadius: 14,
-              background: "#4D8DFF",
+              display: "flex",
+              flexDirection: "column",
+              gap: 12,
+              background: "#07182c",
+              borderRadius: 18,
+              padding: 36,
+              color: "#e7f4ff",
             }}
-          />
-          betows
-        </div>
-        <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-          <div style={{ fontSize: 64, fontWeight: 650, lineHeight: 1.05, maxWidth: 900 }}>
-            Landing pages e sistemas que convertem.
+          >
+            <div style={{ fontSize: 22, color: "#7fd3ff" }}>Nº 000 · perfil</div>
+            <div style={{ fontSize: 52, fontWeight: 700, lineHeight: 1.05 }}>
+              Landing pages e sistemas que convertem.
+            </div>
+            <div style={{ fontSize: 24, color: "#8eb4d4" }}>Roberto Amaral · Brasil</div>
           </div>
-          <div style={{ fontSize: 28, color: "#6D675F", maxWidth: 760 }}>
-            Roberto Amaral · desenvolvedor full-stack · Brasil
-          </div>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            width: 220,
-            height: 48,
-            borderRadius: 999,
-            background: "#E7F08C",
-            alignItems: "center",
-            justifyContent: "center",
-            fontSize: 20,
-            fontWeight: 600,
-          }}
-        >
-          github.com/betows
         </div>
       </div>
     ),

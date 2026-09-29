@@ -13,14 +13,18 @@ export default function Icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#4D8DFF",
-          borderRadius: 10,
-          color: "#E7F08C",
-          fontSize: 18,
-          fontWeight: 700,
+          background: "#d62828",
+          borderRadius: 8,
         }}
       >
-        b
+        <div
+          style={{
+            width: 14,
+            height: 14,
+            borderRadius: 99,
+            background: "#7fd3ff",
+          }}
+        />
       </div>
     ),
     size,

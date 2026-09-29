@@ -1,25 +1,19 @@
 import Link from "next/link";
-import { Mark } from "@/components/Mark";
 
 export default function NotFound() {
   return (
     <div className="grid min-h-svh place-items-center px-6">
-      <div className="max-w-md text-center">
-        <div className="flex justify-center">
-          <Mark />
-        </div>
-        <h1 className="mt-6 text-4xl font-semibold tracking-tight">404</h1>
-        <p className="mt-3 text-muted">
-          Essa página não existe. / This page does not exist.
+      <div className="shell w-full max-w-md rounded-[32px] p-6 text-center text-white">
+        <p className="font-mono text-xs uppercase tracking-[0.28em]">betowdex</p>
+        <h1 className="mt-4 font-mono text-5xl">404</h1>
+        <p className="mt-3 text-sm text-white/85">
+          Entrada não encontrada. / Entry not found.
         </p>
         <div className="mt-6 flex justify-center gap-3">
-          <Link href="/" className="rounded-full bg-lime px-4 py-2 text-sm font-semibold">
+          <Link href="/" className="rounded-full bg-[#ffd15c] px-4 py-2 text-sm font-semibold text-[#2a1408]">
             Português
           </Link>
-          <Link
-            href="/en"
-            className="rounded-full border border-line bg-cream px-4 py-2 text-sm font-semibold"
-          >
+          <Link href="/en" className="rounded-full bg-white/15 px-4 py-2 text-sm font-semibold">
             English
           </Link>
         </div>
