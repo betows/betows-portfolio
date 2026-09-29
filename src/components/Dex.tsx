@@ -20,10 +20,6 @@ function pad(value: number) {
   return String(value).padStart(3, "0");
 }
 
-function isCompact() {
-  return window.matchMedia("(max-width: 860px)").matches;
-}
-
 export function Dex({ locale, copy }: { locale: Locale; copy: Dictionary }) {
   const [tab, setTab] = useState<Tab>("field");
   const [index, setIndex] = useState(0);
@@ -95,12 +91,12 @@ export function Dex({ locale, copy }: { locale: Locale; copy: Dictionary }) {
 
   function openEntry(nextIndex: number) {
     setIndex(nextIndex);
-    if (isCompact()) setPanel("detail");
+    setPanel("detail");
   }
 
   function pressA() {
     if (!current) return;
-    if (isCompact() && panel === "list") {
+    if (panel === "list") {
       setPanel("detail");
       return;
     }
@@ -110,7 +106,7 @@ export function Dex({ locale, copy }: { locale: Locale; copy: Dictionary }) {
   }
 
   function pressB() {
-    if (isCompact() && panel === "detail") {
+    if (panel === "detail") {
       setPanel("list");
       return;
     }
@@ -151,74 +147,48 @@ export function Dex({ locale, copy }: { locale: Locale; copy: Dictionary }) {
   });
 
   return (
-    <div className="mx-auto flex min-h-full w-full max-w-5xl flex-col px-4 py-8 sm:px-6 sm:py-12">
-      <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <p className="font-mono text-xs uppercase tracking-[0.28em] text-[#ffb4a8]">
-            {copy.dex.brand} · {site.aka}
-          </p>
-          <h1 className="mt-2 max-w-xl text-3xl font-semibold tracking-tight text-white sm:text-5xl">
-            {copy.hero.title}
-          </h1>
-          <p className="mt-3 max-w-xl text-sm leading-6 text-[#f0d2cc] sm:text-base">
-            {copy.hero.subtitle}
-          </p>
-        </div>
-        <div className="flex items-center gap-2 rounded-full bg-black/30 p-1 text-sm font-semibold">
-          <Link
-            href="/"
-            hrefLang="pt-BR"
-            className={`rounded-full px-3 py-1 ${locale === "pt" ? "bg-white text-[#7f1218]" : "text-white"}`}
-            aria-current={locale === "pt" ? "page" : undefined}
-          >
-            PT
-          </Link>
-          <Link
-            href="/en"
-            hrefLang="en"
-            className={`rounded-full px-3 py-1 ${locale === "en" ? "bg-white text-[#7f1218]" : "text-white"}`}
-            aria-current={locale === "en" ? "page" : undefined}
-          >
-            EN
-          </Link>
-        </div>
-      </div>
-
-      <div className="shell rounded-[36px] p-4 sm:p-6">
-        <div className="mb-4 flex items-center justify-between px-1">
-          <div className="flex items-center gap-3">
-            <span className="grid h-12 w-12 place-items-center rounded-full bg-gradient-to-b from-[#8fd6ff] to-[#1d6cb5] shadow-[inset_0_-6px_10px_rgba(0,0,0,.35)]">
-              <span className="h-5 w-5 rounded-full bg-[#e7f7ff]/80" />
-            </span>
-            <div>
-              <p className="font-mono text-sm font-semibold uppercase tracking-[0.22em] text-white">
-                {copy.dex.brand}
-              </p>
-              <p className="text-xs text-white/80">{copy.dex.region}</p>
-            </div>
+    <div className="dex-page mx-auto flex w-full max-w-[440px]">
+      <h1 className="sr-only">{copy.hero.title}</h1>
+      <div className="shell flex h-full w-full flex-col gap-2 px-3 py-3">
+        <div className="flex items-center justify-between gap-3 px-1">
+          <div className="lens" aria-hidden="true">
+            <span className="lens-core" />
           </div>
-          <div className="flex items-center gap-2" aria-hidden="true">
-            <span className="h-3 w-3 rounded-full bg-[#ffd15c] shadow-[0_0_10px_#ffd15c]" />
-            <span className="h-3 w-3 rounded-full bg-[#7dffb2] shadow-[0_0_10px_#7dffb2]" />
+          <div className="flex items-center gap-2">
+            <span className="h-3.5 w-3.5 rounded-full border-2 border-[#3a0a08] bg-[#ff3b30]" aria-hidden="true" />
+            <span className="h-3.5 w-3.5 rounded-full border-2 border-[#3a0a08] bg-[#ffe14a]" aria-hidden="true" />
+            <Link
+              href="/"
+              hrefLang="pt-BR"
+              className={`pixel-press border-2 border-[#3a0a08] px-1.5 py-0.5 font-[family-name:var(--font-pixel)] text-[10px] leading-none shadow-[2px_2px_0_#3a0a08] ${locale === "pt" ? "bg-[#ffe14a] text-[#3a0a08]" : "bg-[#ffd0c8] text-[#3a0a08]"}`}
+              aria-current={locale === "pt" ? "page" : undefined}
+            >
+              PT
+            </Link>
+            <Link
+              href="/en"
+              hrefLang="en"
+              className={`pixel-press border-2 border-[#3a0a08] px-1.5 py-0.5 font-[family-name:var(--font-pixel)] text-[10px] leading-none shadow-[2px_2px_0_#3a0a08] ${locale === "en" ? "bg-[#ffe14a] text-[#3a0a08]" : "bg-[#ffd0c8] text-[#3a0a08]"}`}
+              aria-current={locale === "en" ? "page" : undefined}
+            >
+              EN
+            </Link>
           </div>
         </div>
 
-        <div
-          className="dex-device rounded-[22px] bg-[#10141c] p-3 shadow-[inset_0_0_0_3px_#07090d]"
-          data-panel={panel}
-        >
-          <div className="lcd relative grid h-[72vh] min-h-[520px] max-h-[680px] overflow-hidden rounded-xl md:grid-cols-[minmax(240px,0.86fr)_1.14fr]">
-            <div className="lcd-scan" />
-            <div className="boot-overlay absolute inset-0 z-20 grid place-items-center bg-[#071526] font-mono text-sm uppercase tracking-[0.35em] text-[#9ad7ff]">
+        <div className="bezel">
+          <div className="dex-device lcd" data-panel={panel}>
+            <div className="lcd-grid" />
+            <div className="boot-overlay absolute inset-0 z-20 grid place-items-center bg-[#9bbc0f] font-[family-name:var(--font-pixel)] text-xs uppercase tracking-widest text-[#0f380f]">
               {copy.dex.boot}
             </div>
 
-            <div className="dex-list-pane relative z-10 flex min-h-0 flex-col border-[#16406a] p-3 md:border-r">
-              <div className="mb-3 grid grid-cols-2 gap-2 font-mono text-[11px] uppercase tracking-wide">
+            <div className="dex-list-pane relative z-10 flex min-h-0 flex-1 flex-col p-2">
+              <div className="mb-2 grid grid-cols-2 gap-2 font-[family-name:var(--font-pixel)] text-[11px]">
                 <button
                   type="button"
                   onClick={() => selectTab("files")}
-                  className={`rounded-md px-2 py-2 ${tab === "files" ? "bg-[#ffd15c] text-[#2a1408]" : "bg-[#0c2238] text-[#9ad7ff]"}`}
+                  className={`pixel-press border-[3px] border-[#0f380f] px-1 py-1 shadow-[3px_3px_0_#0f380f] ${tab === "files" ? "bg-[#0f380f] text-[#9bbc0f]" : "bg-[#9bbc0f] text-[#0f380f]"}`}
                   aria-pressed={tab === "files"}
                 >
                   {copy.dex.files}
@@ -226,7 +196,7 @@ export function Dex({ locale, copy }: { locale: Locale; copy: Dictionary }) {
                 <button
                   type="button"
                   onClick={() => selectTab("field")}
-                  className={`rounded-md px-2 py-2 ${tab === "field" ? "bg-[#ffd15c] text-[#2a1408]" : "bg-[#0c2238] text-[#9ad7ff]"}`}
+                  className={`pixel-press border-[3px] border-[#0f380f] px-1 py-1 shadow-[3px_3px_0_#0f380f] ${tab === "field" ? "bg-[#0f380f] text-[#9bbc0f]" : "bg-[#9bbc0f] text-[#0f380f]"}`}
                   aria-pressed={tab === "field"}
                 >
                   {copy.dex.field}
@@ -244,11 +214,11 @@ export function Dex({ locale, copy }: { locale: Locale; copy: Dictionary }) {
                   setPanel("list");
                 }}
                 placeholder={copy.dex.searchPh}
-                className="mb-3 rounded-md border border-[#1d4e7a] bg-[#061018] px-3 py-2 font-mono text-xs text-[#e7f4ff] outline-none placeholder:text-[#6f93b3] focus:border-[#7fd3ff]"
+                className="mb-2 border-[3px] border-[#0f380f] bg-[#8bac0f] px-2 py-1 text-lg text-[#0f380f] outline-none placeholder:text-[#306230]"
               />
-              <div className="dex-list min-h-0 flex-1 space-y-1 overflow-y-auto pr-1" role="listbox" aria-label={copy.dex.brand}>
+              <div className="dex-list min-h-0 flex-1 overflow-y-auto" role="listbox" aria-label={copy.dex.brand}>
                 {entries.length === 0 ? (
-                  <p className="px-2 py-6 text-sm text-[#8eb4d4]">{copy.dex.empty}</p>
+                  <p className="px-1 py-4 text-xl">{copy.dex.empty}</p>
                 ) : (
                   entries.map((entry, entryIndex) => {
                     const selected = entryIndex === safeIndex;
@@ -261,12 +231,12 @@ export function Dex({ locale, copy }: { locale: Locale; copy: Dictionary }) {
                         role="option"
                         aria-selected={selected}
                         onClick={() => openEntry(entryIndex)}
-                        className={`flex w-full items-center gap-3 rounded-lg px-2 py-2 text-left font-mono text-sm ${
-                          selected ? "bg-[#12375c] text-white" : "text-[#c5ddf0] hover:bg-[#0c2740]"
+                        className={`flex w-full items-center gap-2 px-1 py-0.5 text-left text-[22px] leading-6 ${
+                          selected ? "bg-[#0f380f] text-[#9bbc0f]" : "text-[#0f380f]"
                         }`}
                       >
-                        <span className="w-4 text-[#ffd15c]">{selected ? "▸" : ""}</span>
-                        <span className="w-9 text-[#7fd3ff]">{number}</span>
+                        <span className="w-4">{selected ? ">" : ""}</span>
+                        <span className="w-10">{number}</span>
                         <span className="truncate">{entry.title}</span>
                       </button>
                     );
@@ -275,7 +245,7 @@ export function Dex({ locale, copy }: { locale: Locale; copy: Dictionary }) {
               </div>
             </div>
 
-            <div className="dex-detail relative z-10 flex min-h-0 flex-col overflow-y-auto p-4 sm:p-5" aria-live="polite">
+            <div className="dex-detail relative z-10 min-h-0 flex-1 overflow-y-auto p-2" aria-live="polite">
               {current ? (
                 <EntryView
                   entry={current}
@@ -287,14 +257,22 @@ export function Dex({ locale, copy }: { locale: Locale; copy: Dictionary }) {
                   onBack={() => setPanel("list")}
                 />
               ) : (
-                <p className="text-sm text-[#8eb4d4]">{copy.dex.empty}</p>
+                <p className="text-xl">{copy.dex.empty}</p>
               )}
             </div>
           </div>
         </div>
 
-        <div className="mt-4 grid items-center gap-4 rounded-[28px] bg-[#121820] px-4 py-4 text-white shadow-[inset_0_1px_0_rgba(255,255,255,.06)] sm:grid-cols-[auto_1fr_auto] sm:px-6">
-          <div className="grid h-28 w-28 grid-cols-3 grid-rows-3 place-items-center justify-self-center sm:justify-self-start">
+        <div className="flex items-center justify-between px-2 pb-1" aria-hidden="true">
+          {Array.from({ length: 7 }, (_, slot) => (
+            <span key={slot} className="h-4 w-1.5 bg-[#1a1a1a]" />
+          ))}
+        </div>
+
+        <div className="flex items-end justify-between px-2 pb-1">
+          <div className="relative grid h-[104px] w-[104px] grid-cols-3 grid-rows-3 place-items-center">
+            <span className="pointer-events-none absolute top-0 bottom-0 left-1/2 w-9 -translate-x-1/2 bg-[#1a1a1a]" />
+            <span className="pointer-events-none absolute top-1/2 right-0 left-0 h-9 -translate-y-1/2 bg-[#1a1a1a]" />
             <span />
             <PadButton label={copy.dex.up} onClick={() => move(-1)}>
               ▲
@@ -303,7 +281,7 @@ export function Dex({ locale, copy }: { locale: Locale; copy: Dictionary }) {
             <PadButton label={copy.dex.toFiles} onClick={() => selectTab("files")}>
               ◀
             </PadButton>
-            <span className="h-6 w-6 rounded-full bg-[#2a3342]" />
+            <span />
             <PadButton label={copy.dex.toField} onClick={() => selectTab("field")}>
               ▶
             </PadButton>
@@ -313,10 +291,7 @@ export function Dex({ locale, copy }: { locale: Locale; copy: Dictionary }) {
             </PadButton>
             <span />
           </div>
-          <p className="text-center font-mono text-[11px] uppercase leading-5 tracking-wide text-[#9eb0c6]">
-            {copy.dex.hint}
-          </p>
-          <div className="flex items-center justify-center gap-4 sm:justify-end">
+          <div className="flex items-center gap-3 pb-1">
             <RoundButton label={copy.dex.back} tone="blue" onClick={pressB}>
               B
             </RoundButton>
@@ -326,10 +301,6 @@ export function Dex({ locale, copy }: { locale: Locale; copy: Dictionary }) {
           </div>
         </div>
       </div>
-
-      <p className="mt-6 text-center text-xs text-[#e7c7c1]">
-        © {new Date().getFullYear()} {copy.footer.rights}
-      </p>
     </div>
   );
 }
@@ -348,7 +319,7 @@ function PadButton({
       type="button"
       aria-label={label}
       onClick={onClick}
-      className="dpad-btn grid h-9 w-9 place-items-center rounded-md bg-[#3a4456] text-xs text-white shadow-[inset_0_1px_0_rgba(255,255,255,.25)]"
+      className="relative z-10 grid h-9 w-9 place-items-center bg-[#1a1a1a] font-[family-name:var(--font-pixel)] text-[10px] text-[#f4f4f4]"
     >
       {children}
     </button>
@@ -368,14 +339,14 @@ function RoundButton({
 }) {
   const toneClass =
     tone === "amber"
-      ? "bg-[#ffd15c] text-[#2a1408]"
-      : "bg-[#3d7eff] text-white";
+      ? "bg-[#ffe14a] text-[#1a1a1a]"
+      : "bg-[#2f6fed] text-white";
   return (
     <button
       type="button"
       aria-label={label}
       onClick={onClick}
-      className={`hardware-btn grid h-16 w-16 place-items-center rounded-full text-lg font-bold shadow-[inset_0_-6px_0_rgba(0,0,0,.2)] ${toneClass}`}
+      className={`pixel-press grid h-12 w-12 place-items-center rounded-full border-[3px] border-[#111] font-[family-name:var(--font-pixel)] text-sm shadow-[3px_3px_0_#111] ${toneClass}`}
     >
       <span className="sr-only">{label}</span>
       {children}
@@ -404,34 +375,34 @@ function EntryView({
   const seed = entry.kind === "project" ? entry.project.slug : entry.id;
 
   return (
-    <article className="flex h-full flex-col">
-      <div className="flex items-start justify-between gap-3 font-mono text-[11px] uppercase tracking-[0.18em] text-[#7fd3ff]">
+    <article className="flex min-h-full flex-col text-[#0f380f]">
+      <div className="flex items-center justify-between gap-2 text-xl">
         <p>
           {copy.dex.no} {number}
         </p>
-        <button type="button" className="md:hidden" onClick={onBack}>
+        <button type="button" className="font-[family-name:var(--font-pixel)] text-[11px]" onClick={onBack}>
           {copy.dex.back}
         </button>
       </div>
-      <div className="mt-4 flex items-center gap-4">
-        <div className="rounded-xl border border-[#1d4e7a] bg-[#04101c] p-2">
+      <div className="mt-2 flex items-center gap-3">
+        <div className="border-[3px] border-[#0f380f] bg-[#0f380f] p-1">
           <Sprite seed={seed} />
         </div>
         <div>
-          <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">{title}</h2>
+          <h2 className="font-[family-name:var(--font-pixel)] text-lg leading-5">{title}</h2>
           {entry.kind === "project" ? (
-            <p className="mt-1 text-xs uppercase tracking-wide text-[#ffd15c]">
+            <p className="mt-1 text-lg leading-5">
               {entry.project.featured ? copy.dex.flagship : copy.dex.entry}
               {" · "}
               {entry.project.liveNote ? copy.dex.offline : copy.dex.live}
             </p>
           ) : (
-            <p className="mt-1 text-xs uppercase tracking-wide text-[#ffd15c]">{copy.dex.files}</p>
+            <p className="mt-1 text-lg leading-5">{copy.dex.files}</p>
           )}
         </div>
       </div>
 
-      <div className="mt-5 flex-1 text-sm leading-6 text-[#d5e8f7]">
+      <div className="mt-3 text-lg leading-6">
         {entry.kind === "project" ? (
           <ProjectBody project={entry.project} locale={locale} copy={copy} />
         ) : null}
@@ -454,7 +425,7 @@ function ProfileBody({ copy }: { copy: Dictionary }) {
       <p>{copy.about.p3}</p>
       <div className="flex flex-wrap gap-2 pt-2">
         {["Next.js", "TypeScript", "React", "Stripe", "Vercel", "React Native", "SEO"].map((skill) => (
-          <span key={skill} className="rounded-full bg-[#12375c] px-2.5 py-1 font-mono text-[11px] text-[#d7f1ff]">
+          <span key={skill} className="border-2 border-[#0f380f] px-1.5 py-0.5 font-[family-name:var(--font-pixel)] text-[10px]">
             {skill}
           </span>
         ))}
@@ -464,13 +435,13 @@ function ProfileBody({ copy }: { copy: Dictionary }) {
           href={site.github}
           target="_blank"
           rel="noreferrer"
-          className="rounded-full bg-[#ffd15c] px-4 py-2 text-sm font-semibold text-[#2a1408]"
+          className="pixel-press border-[3px] border-[#0f380f] bg-[#0f380f] px-3 py-1 font-[family-name:var(--font-pixel)] text-[11px] text-[#9bbc0f]"
         >
           GitHub
         </a>
         <a
           href={`mailto:${site.email}`}
-          className="rounded-full border border-[#1d4e7a] px-4 py-2 text-sm font-semibold text-white"
+          className="border-[3px] border-[#0f380f] px-3 py-1 font-[family-name:var(--font-pixel)] text-[11px]"
         >
           {copy.contact.email}
         </a>
@@ -482,12 +453,12 @@ function ProfileBody({ copy }: { copy: Dictionary }) {
 function ServicesBody({ copy }: { copy: Dictionary }) {
   return (
     <div className="space-y-4">
-      <p className="text-[#8eb4d4]">{copy.services.subtitle}</p>
+      <p>{copy.services.subtitle}</p>
       {copy.services.items.map((item) => (
-        <section key={item.title} className="rounded-xl border border-[#16406a] bg-[#0a2036] p-3">
-          <h3 className="text-base font-semibold text-white">{item.title}</h3>
+        <section key={item.title} className="border-[3px] border-[#0f380f] p-2">
+          <h3 className="font-[family-name:var(--font-pixel)] text-sm">{item.title}</h3>
           <p className="mt-1">{item.body}</p>
-          <ul className="mt-2 space-y-1 text-[#b7d4ea]">
+          <ul className="mt-2 space-y-1">
             {item.points.map((point) => (
               <li key={point}>· {point}</li>
             ))}
@@ -512,11 +483,11 @@ function FaqBody({
       {items.map((item, itemIndex) => {
         const isOpen = open === itemIndex;
         return (
-          <div key={item.q} className="rounded-xl border border-[#16406a] bg-[#0a2036]">
+          <div key={item.q} className="border-[3px] border-[#0f380f]">
             <h3>
               <button
                 type="button"
-                className="flex w-full items-center justify-between gap-3 px-3 py-3 text-left font-semibold text-white"
+                className="flex w-full items-center justify-between gap-3 px-2 py-2 text-left text-xl"
                 aria-expanded={isOpen}
                 onClick={() => onOpen(isOpen ? -1 : itemIndex)}
               >
@@ -524,7 +495,7 @@ function FaqBody({
                 <span aria-hidden="true">{isOpen ? "–" : "+"}</span>
               </button>
             </h3>
-            {isOpen ? <p className="px-3 pb-3 text-[#b7d4ea]">{item.a}</p> : null}
+            {isOpen ? <p className="px-2 pb-2">{item.a}</p> : null}
           </div>
         );
       })}
@@ -540,7 +511,7 @@ function ContactBody({ copy }: { copy: Dictionary }) {
         href={site.github}
         target="_blank"
         rel="noreferrer"
-        className="inline-flex rounded-full bg-[#ffd15c] px-4 py-2 text-sm font-semibold text-[#2a1408]"
+        className="inline-flex border-[3px] border-[#0f380f] bg-[#0f380f] px-3 py-1 font-[family-name:var(--font-pixel)] text-[11px] text-[#9bbc0f]"
       >
         {copy.contact.github}
       </a>
@@ -561,13 +532,13 @@ function ProjectBody({
   return (
     <div className="space-y-4">
       <p>{project.blurb[locale]}</p>
-      {project.featured ? <p className="text-[#8eb4d4]">{copy.featured.body}</p> : null}
+      {project.featured ? <p>{copy.featured.body}</p> : null}
       {project.liveNote ? (
-        <p className="rounded-lg bg-[#3a2414] px-3 py-2 text-[#ffd7a8]">{project.liveNote[locale]}</p>
+        <p className="border-[3px] border-[#0f380f] bg-[#8bac0f] px-2 py-1">{project.liveNote[locale]}</p>
       ) : null}
       <div className="flex flex-wrap gap-2">
         {project.tags.map((tag) => (
-          <span key={tag} className="rounded-full bg-[#12375c] px-2.5 py-1 font-mono text-[11px] uppercase text-[#d7f1ff]">
+          <span key={tag} className="border-2 border-[#0f380f] px-1.5 py-0.5 font-[family-name:var(--font-pixel)] text-[10px] uppercase">
             {tag}
           </span>
         ))}
@@ -578,7 +549,7 @@ function ProjectBody({
             href={project.url}
             target="_blank"
             rel="noreferrer"
-            className="rounded-full bg-[#ffd15c] px-4 py-2 text-sm font-semibold text-[#2a1408]"
+            className="border-[3px] border-[#0f380f] bg-[#0f380f] px-3 py-1 font-[family-name:var(--font-pixel)] text-[11px] text-[#9bbc0f]"
           >
             {copy.dex.open}
           </a>
@@ -591,7 +562,7 @@ function ProjectBody({
             href={repo}
             target="_blank"
             rel="noreferrer"
-            className="rounded-full border border-[#1d4e7a] px-3 py-2 font-mono text-xs text-white"
+            className="border-2 border-[#0f380f] px-2 py-1 text-lg"
           >
             {repo.replace("https://github.com/betows/", "")}
           </a>

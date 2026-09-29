@@ -8,7 +8,7 @@ The interface is **betowdex**, an original handheld catalog. Browse numbered pro
 
 - Next.js App Router + TypeScript
 - Tailwind CSS 4
-- Figtree + Geist Mono
+- Pixelify Sans + VT323 (8-bit screen)
 - `/` = Portuguese, `/en` = English
 - JSON-LD (`Person`, `ProfessionalService`, `FAQPage`), sitemap, robots, hreflang, OG
 
