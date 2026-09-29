@@ -34,7 +34,7 @@ export default async function RootLayout({
       lang={locale === "en" ? "en" : "pt-BR"}
       className={`${figtree.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-paper font-sans text-ink">{children}</body>
+      <body className="min-h-full font-sans">{children}</body>
     </html>
   );
 }
