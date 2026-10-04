@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Pixelify_Sans, VT323 } from "next/font/google";
-import { headers } from "next/headers";
+import { HtmlLang } from "@/components/HtmlLang";
 import { localeMetadata } from "@/lib/metadata";
 import { getSiteUrl } from "@/lib/site";
 import "./globals.css";
@@ -18,24 +18,24 @@ const lcd = VT323({
   display: "swap",
 });
 
+export const dynamic = "force-static";
+
 export const metadata: Metadata = {
   ...localeMetadata("pt"),
   metadataBase: new URL(getSiteUrl()),
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const locale = (await headers()).get("x-locale") === "en" ? "en" : "pt";
-
   return (
-    <html
-      lang={locale === "en" ? "en" : "pt-BR"}
-      className={`${pixel.variable} ${lcd.variable} h-full`}
-    >
-      <body className="min-h-full font-sans">{children}</body>
+    <html lang="pt-BR" className={`${pixel.variable} ${lcd.variable} h-full`}>
+      <body className="min-h-full font-sans">
+        <HtmlLang />
+        {children}
+      </body>
     </html>
   );
 }
