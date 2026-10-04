@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Pixelify_Sans, VT323 } from "next/font/google";
+import { HtmlLang } from "@/components/HtmlLang";
 import { localeMetadata } from "@/lib/metadata";
 import { getSiteUrl } from "@/lib/site";
 import "./globals.css";
@@ -31,7 +32,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR" className={`${pixel.variable} ${lcd.variable} h-full`}>
-      <body className="min-h-full font-sans">{children}</body>
+      <body className="min-h-full font-sans">
+        <HtmlLang />
+        {children}
+      </body>
     </html>
   );
 }
